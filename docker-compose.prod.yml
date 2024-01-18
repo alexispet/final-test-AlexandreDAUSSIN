@@ -1,6 +1,6 @@
 services:
   express:
-    image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:develop
+    image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:main
     environment:
       - NODE_ENV=development
       - DB_HOST=db
