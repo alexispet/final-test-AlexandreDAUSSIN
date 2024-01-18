@@ -12,8 +12,7 @@ LABEL org.opencontainers.image.source https://github.com/alexispet/final-test-Al
 
 WORKDIR /app
 
-COPY --from=build /app/package.json .
-COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app .
 
 # On expose le port
 EXPOSE 3000
