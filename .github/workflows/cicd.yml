@@ -1,5 +1,5 @@
 name: cicd
-run-name: Build the project
+run-name: Build and push image
 on: [push]
 
 env:
@@ -7,50 +7,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/Cypress
-            node_modules
-          key: ${{ runner.os }}node-${{ hashFiles('**/package-lock.json') }}
-      - run: npm ci
-
-  test:
-    needs: [build]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        browser: ["chrome", "edge"]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache/restore@v3
-        with:
-          path: |
-            ~/.cache/Cypress
-            node_modules
-          key: ${{ runner.os }}node-${{ hashFiles('**/package-lock.json') }}
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          install: false
-          start: npm start
-          browser: ${{ matrix.browser }}
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: Cypress videos ${{ matrix.browser }}
-          path: cypress/videos
-
-  deploy-server:
+  build_and_psuh_image:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     permissions:
