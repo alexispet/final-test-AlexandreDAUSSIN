@@ -1,0 +1,38 @@
+services:
+  express:
+    image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:develop
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_USER=userops
+      - DB_PASSWORD=userops
+      - DB_DATABASE=tpdevops
+    ports:
+      - "3000:3000"
+    depends_on:
+        db:
+          condition: service_healthy
+    volumes:
+      - ".:/app"
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_DATABASE: tpdevops
+      MYSQL_USER: userops
+      MYSQL_PASSWORD: userops
+    volumes:
+      - "./docker/mysql/data:/var/lib/mysql"
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: "/usr/bin/mysql --user=userops --password=userops --execute \"SHOW DATABASES;\""
+      interval: 1m
+      timeout: 20s
+      retries: 5
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
