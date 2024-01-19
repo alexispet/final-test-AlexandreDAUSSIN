@@ -2,7 +2,7 @@ services:
   express:
     image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:main
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - DB_HOST=db
       - DB_USER=userops
       - DB_PASSWORD=userops
@@ -12,8 +12,6 @@ services:
     depends_on:
         db:
           condition: service_healthy
-    volumes:
-      - ".:/app"
 
   db:
     image: mysql
