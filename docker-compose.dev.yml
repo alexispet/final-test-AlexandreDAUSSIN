@@ -1,6 +1,6 @@
 services:
   express:
-    image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:main
+    image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:develop
     environment:
       - NODE_ENV=development
       - DB_HOST=db
@@ -23,7 +23,7 @@ services:
     volumes:
       - "./docker/mysql/data:/var/lib/mysql"
     ports:
-      - 3306:3306
+      - 3307:3306
     healthcheck:
       test: "/usr/bin/mysql --user=userops --password=userops --execute \"SHOW DATABASES;\""
       interval: 1m
@@ -33,4 +33,4 @@ services:
   adminer:
     image: adminer
     ports:
-      - 8080:8080
+      - 8081:8080

@@ -55,3 +55,20 @@ jobs:
                 ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
                 cd prod && \
                 sudo docker compose -f docker-compose.prod.yml up --pull always -d"
+    
+    deploy-developement:
+      needs: [build_and_push_image]
+      name: Déploiement sur le serveur de dev
+      if: github.ref_name == 'develop'
+      environment:
+          name: developement
+          url: ec2-18-233-100-4.compute-1.amazonaws.com:3000
+      runs-on: ubuntu-latest
+      steps:
+          - uses: webfactory/ssh-agent@v0.8.0
+            with:
+                ssh-private-key: ${{ secrets.SSH_KEY }}
+          - run: |
+              ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
+              cd dev && \
+              sudo docker compose -f docker-compose.dev.yml up --pull always -d"
