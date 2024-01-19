@@ -1,8 +1,8 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/OlYrOqbl)
 # Y Social network API
 
-Production URL: http://ec2-3-95-31-144.compute-1.amazonaws.com 
-Development URL: http://ec2-3-95-31-144.compute-1.amazonaws.com:3000
+Production URL: http://ec2-3-86-213-89.compute-1.amazonaws.com 
+Development URL: http://ec2-3-86-213-89.compute-1.amazonaws.com:3000
 
 ## Description
 This is the official API for the Y Social Network. 
