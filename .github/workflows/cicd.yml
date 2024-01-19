@@ -77,7 +77,7 @@ jobs:
           - run: |
               ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
               cd dev && \
-              sudo docker compose -f docker-compose.dev.yml up --pull always -d"
+              sudo docker compose -f docker-compose.dev.yml up --pull always"
           - name: Shoutrrr
             uses: containrrr/shoutrrr-action@v1
             with:
