@@ -2,7 +2,7 @@ services:
   express:
     image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:develop
     environment:
-      NODE_ENV: development
+      NODE_ENV: DEV
       DB_HOST: ${DB_HOST}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}

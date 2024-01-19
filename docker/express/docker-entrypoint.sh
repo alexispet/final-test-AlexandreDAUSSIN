@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $NODE_ENV == "development" ]
+if [ $NODE_ENV == "DEV" ]
 then
     echo "On est en development"
     npm install
