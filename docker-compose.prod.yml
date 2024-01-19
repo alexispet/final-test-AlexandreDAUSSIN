@@ -7,8 +7,8 @@ services:
       DB_USER: userops
       DB_PASSWORD: userops
       DB_DATABASE: tpdevops
-    ports:
-      - "80:3000"
+    # ports:
+    #   - "80:3000"
     depends_on:
         db:
           condition: service_healthy
