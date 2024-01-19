@@ -83,7 +83,7 @@ jobs:
             with:
                 url: discord://zeRs60SJTzoVWw2aM5Lt7ITZ0kLN9KM_v7Ju6JeeeYkxN8-j23BfJ3i-Vh3Xh9zCvhOE@1197892329915305994
                 title: Deployed dev
-                message: See changes at ${{ github.eveny.compare }}
+                message: See changes at ${{ github.event.compare }}
     
     lint:
       runs-on: ubuntu-latest

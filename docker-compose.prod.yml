@@ -14,6 +14,9 @@ services:
           condition: service_healthy
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.express-prod.rule=Host(ec2-3-95-31-144.compute-1.amazonaws.com)"
+      - "traefik.http.routers.express-prod.entrypoints=prod"
 
   db:
     image: mysql
@@ -36,3 +39,16 @@ services:
     image: adminer
     ports:
       - 8080:8080
+    
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.prod.address=:80"
+    ports:
+      "80:80"
+    volumes:
+      "/var/run/docker.sock:/var/run/docker.sock:ro"
