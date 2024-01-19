@@ -7,8 +7,8 @@ services:
       DB_USER: userops
       DB_PASSWORD: userops
       DB_DATABASE: tpdevops
-    # ports:
-    #   - "3000:3000"
+    ports:
+      - "3000:3000"
     depends_on:
         db:
           condition: service_healthy
@@ -16,7 +16,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.express-dev.rule=Host(ec2-3-95-31-144.compute-1.amazonaws.com)"
-      - "traefik.http.routers.express-dev.entrypoints=dev,websecure"
+      - "traefik.http.routers.express-dev.entrypoints=dev"
       - "traefik.http.routers.express-dev.tls=true"
 
   db:
@@ -49,15 +49,9 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.dev.address=:3000"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.email=alexandre.daussin@gmail.com"
-      - "--certificatesresolvers.myresolver.acme.storage=/acme.json"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
 
     ports:
       - "3000:3000"
-      - "3000:443"
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./acme.json:/acme.json"
