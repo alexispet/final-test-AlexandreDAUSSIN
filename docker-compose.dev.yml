@@ -3,10 +3,10 @@ services:
     image: ghcr.io/alexispet/final-test-alexandredaussin/tpdevops:develop
     environment:
       NODE_ENV: DEV
-      DB_HOST: ${DB_HOST}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
+      DB_HOST: db
+      DB_USER: userops
+      DB_PASSWORD: userops
+      DB_DATABASE: tpdevops
     # ports:
     #   - "3000:3000"
     depends_on:
@@ -23,9 +23,9 @@ services:
     image: mysql
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: yes
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: tpdevops
+      MYSQL_USER: userops
+      MYSQL_PASSWORD: userops
     volumes:
       - "./docker/mysql/data:/var/lib/mysql"
     ports:
