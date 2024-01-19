@@ -16,7 +16,8 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.enable=true"
       - "traefik.http.routers.express-prod.rule=Host(ec2-3-95-31-144.compute-1.amazonaws.com)"
-      - "traefik.http.routers.express-prod.entrypoints=prod"
+      - "traefik.http.routers.express-prod.entrypoints=prod,websecure"
+      - "traefik.http.routers.express-prod.tls=true"
 
   db:
     image: mysql
@@ -47,8 +48,15 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.prod.address=:80"
+      - "--entrypoints.dev.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.email=alexandre.daussin@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/acme.json"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+
     ports:
-      "80:80"
+      - "80:80"
+      - "443:443"
     volumes:
-      "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./acme.json:/acme.json"
