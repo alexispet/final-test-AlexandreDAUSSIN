@@ -17,7 +17,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.express-dev.rule=Host(ec2-3-95-31-144.compute-1.amazonaws.com)"
       - "traefik.http.routers.express-dev.entrypoints=dev"
-      - "traefik.http.routers.express-dev.tls=true"
 
   db:
     image: mysql
